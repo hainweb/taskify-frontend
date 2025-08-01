@@ -18,3 +18,12 @@ export const login = async (userData) => {
 export const logout = () => {
   localStorage.removeItem("user");
 };
+
+
+// Update Profile
+export const updateProfile = async (userData, token) => {
+  const res = await axios.put(API_URL + "profile", userData, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return res.data;
+};
