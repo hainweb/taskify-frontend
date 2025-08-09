@@ -19,6 +19,8 @@ function Navbar() {
           <Link to="/profile">Profile</Link>
         </>
       )}
+
+      {user && <Link to="/tasks">Tasks</Link>}
     </nav>
   );
 }
