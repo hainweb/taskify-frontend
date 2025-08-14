@@ -6,6 +6,7 @@ import Profile from "./pages/Profile";
 import Navbar from "./components/Navbar";
 import Tasks from "./pages/Tasks";
 import Projects from "./pages/Projects";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/tasks" element={<Tasks />} />
         <Route path="/projects" element={<Projects />} />
+        <Route path="/dashboard" element={<Dashboard />} />
 
       </Routes>
     </Router>
