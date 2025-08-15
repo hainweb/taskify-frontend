@@ -22,6 +22,8 @@ function Navbar() {
 
       {user && <Link to="/tasks">Tasks</Link>}
       {user && <Link to="/projects">Projects</Link>}
+      {user && <Link to="/dashboard">Dashboard</Link>}
+
     </nav>
   );
 }
