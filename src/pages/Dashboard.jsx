@@ -1,35 +1,27 @@
-import { useContext, useEffect, useState } from "react";
-import AuthContext from "../context/AuthContext";
-import { getStats } from "../services/statsService";
+import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 
-function Dashboard() {
-  const { user } = useContext(AuthContext);
-  const [stats, setStats] = useState(null);
+const data = [
+  { name: "Completed", value: stats.completed },
+  { name: "Pending", value: stats.pending },
+];
 
-  useEffect(() => {
-    if (user) {
-      getStats(user.token).then(setStats);
-    }
-  }, [user]);
+const COLORS = ["#10B981", "#F59E0B"];
 
-  if (!stats) return <p className="p-4">Loading stats...</p>;
-
-  return (
-    <div className="p-6 grid grid-cols-3 gap-4">
-      <div className="bg-blue-500 text-white rounded-xl p-6 text-center">
-        <h2 className="text-2xl font-bold">{stats.total}</h2>
-        <p>Total Tasks</p>
-      </div>
-      <div className="bg-green-500 text-white rounded-xl p-6 text-center">
-        <h2 className="text-2xl font-bold">{stats.completed}</h2>
-        <p>Completed</p>
-      </div>
-      <div className="bg-yellow-500 text-white rounded-xl p-6 text-center">
-        <h2 className="text-2xl font-bold">{stats.pending}</h2>
-        <p>Pending</p>
-      </div>
-    </div>
-  );
-}
-
-export default Dashboard;
+<PieChart width={400} height={250}>
+  <Pie
+    data={data}
+    dataKey="value"
+    nameKey="name"
+    cx="50%"
+    cy="50%"
+    outerRadius={80}
+    fill="#8884d8"
+    label
+  >
+    {data.map((entry, index) => (
+      <Cell key={index} fill={COLORS[index % COLORS.length]} />
+    ))}
+  </Pie>
+  <Tooltip />
+  <Legend />
+</PieChart>;
