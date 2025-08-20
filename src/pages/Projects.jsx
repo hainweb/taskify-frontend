@@ -5,6 +5,7 @@ import {
   getProjects,
   deleteProject,
 } from "../services/projectService";
+import Loader from "../components/Loader";
 
 function Projects() {
   const { user } = useContext(AuthContext);
@@ -28,6 +29,8 @@ function Projects() {
     await deleteProject(id, user.token);
     setProjects(projects.filter((p) => p._id !== id));
   };
+
+  if (!projects) return <Loader />;
 
   return (
     <div className="p-4">

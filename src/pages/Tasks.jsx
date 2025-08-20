@@ -6,6 +6,7 @@ import {
   updateTask,
   deleteTask,
 } from "../services/taskService";
+import Loader from "../components/Loader";
 
 function Tasks() {
   const { user } = useContext(AuthContext);
@@ -33,11 +34,11 @@ function Tasks() {
   const [projects, setProjects] = useState([]);
   const [filterProject, setFilterProject] = useState("");
 
- 
-
   const filteredTasks = tasks.filter((t) =>
     filterProject ? t.project === filterProject : true
   );
+
+  if (!tasks) return <Loader />;
 
   return (
     <div className="p-4">
@@ -69,20 +70,19 @@ function Tasks() {
         <ul className="space-y-2">
           {tasks.map((task) => (
             <li
-  key={task._id}
-  className={`p-3 rounded-lg shadow flex justify-between items-center ${
-    task.completed ? "bg-green-100" : "bg-yellow-100"
-  }`}
->
-  <span className="font-medium">{task.title}</span>
-  <button
-    onClick={() => handleDelete(task._id)}
-    className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
-  >
-    Delete
-  </button>
-</li>
-
+              key={task._id}
+              className={`p-3 rounded-lg shadow flex justify-between items-center ${
+                task.completed ? "bg-green-100" : "bg-yellow-100"
+              }`}
+            >
+              <span className="font-medium">{task.title}</span>
+              <button
+                onClick={() => handleDelete(task._id)}
+                className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
+              >
+                Delete
+              </button>
+            </li>
           ))}
         </ul>
       </div>
