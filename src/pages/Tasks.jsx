@@ -62,6 +62,7 @@ function Tasks() {
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Enter task"
           />
+
           <button className="bg-blue-500 text-white px-4 py-2 rounded">
             Add
           </button>
@@ -72,7 +73,11 @@ function Tasks() {
             <li
               key={task._id}
               className={`p-3 rounded-lg shadow flex justify-between items-center ${
-                task.completed ? "bg-green-100" : "bg-yellow-100"
+                task.isOverdue
+                  ? "bg-red-200"
+                  : task.completed
+                  ? "bg-green-100"
+                  : "bg-yellow-100"
               }`}
             >
               <span className="font-medium">{task.title}</span>
