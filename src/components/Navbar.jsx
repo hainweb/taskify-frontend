@@ -11,6 +11,19 @@ function Navbar() {
       <h1 className="text-xl font-bold">Taskify</h1>
       <div className="flex gap-4">
         {user && (
+  <Link to="/profile" className="flex items-center gap-2">
+    {user.avatar && (
+      <img
+        src={`http://localhost:5000${user.avatar}`}
+        alt="avatar"
+        className="w-8 h-8 rounded-full"
+      />
+    )}
+    {user.name}
+  </Link>
+)}
+
+        {user && (
           <>
             <Link className="flex items-center gap-1" to="/dashboard">
               <ChartBarIcon className="h-5 w-5" /> Dashboard
